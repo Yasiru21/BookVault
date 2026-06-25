@@ -1,0 +1,34 @@
+# ── .NET Backend ──────────────────────────────────────────────────────────────
+backend/LibraryAPI/bin/
+backend/LibraryAPI/obj/
+backend/LibraryAPI/*.db
+backend/LibraryAPI/*.db-shm
+backend/LibraryAPI/*.db-wal
+backend/LibraryAPI/library.db
+
+# ── Frontend (Node / Vite) ────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env.*.local
+
+# ── IDE & OS ──────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.DS_Store
+Thumbs.db
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Environment secrets ───────────────────────────────────────────────────────
+.env
+.env.local
+*.env

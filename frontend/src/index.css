@@ -1,0 +1,473 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Global Design System — Library Management System
+   Dark glassmorphism theme with indigo/violet accent palette
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Google Fonts are loaded in index.html ── */
+
+/* ── CSS Custom Properties (Design Tokens) ──────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #0f0f1a;
+  --color-bg-card: rgba(255, 255, 255, 0.04);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.07);
+  --color-glass: rgba(255, 255, 255, 0.06);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-border-hover: rgba(37, 99, 235, 0.4);
+
+  /* Accent palette — blue */
+  --color-accent-primary: #2563eb;       /* blue-600 */
+  --color-accent-secondary: #1d4ed8;    /* blue-700 */
+  --color-accent-light: #60a5fa;        /* blue-400 */
+  --color-accent-glow: rgba(37, 99, 235, 0.3);
+  --color-accent-gradient: linear-gradient(135deg, #2563eb, #0ea5e9);
+
+  /* Text */
+  --color-text-primary: #f1f0ff;
+  --color-text-secondary: #a5a3c0;
+  --color-text-muted: #6b6987;
+
+  /* Semantic colors */
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.1);
+  --color-danger: #ef4444;
+  --color-danger-bg: rgba(239, 68, 68, 0.1);
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Border radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 24px rgba(37, 99, 235, 0.25);
+  --shadow-glow-strong: 0 0 40px rgba(37, 99, 235, 0.4);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  --transition-theme: 300ms ease;
+}
+
+/* ── Light Mode Overrides ────────────────────────────────────────────────────── */
+/* Applied when ThemeContext sets data-theme="light" on <html>                   */
+[data-theme="light"] {
+  /* Backgrounds */
+  --color-bg-primary: #eff6ff;
+  --color-bg-secondary: #dbeafe;
+  --color-bg-card: rgba(255, 255, 255, 0.75);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.95);
+  --color-glass: rgba(255, 255, 255, 0.65);
+  --color-glass-border: rgba(37, 99, 235, 0.15);
+  --color-glass-border-hover: rgba(37, 99, 235, 0.35);
+
+  /* Text */
+  --color-text-primary: #1e3a5f;
+  --color-text-secondary: #2563a0;
+  --color-text-muted: #5b8ac4;
+
+  /* Shadows (softer in light mode) */
+  --shadow-sm: 0 1px 3px rgba(37, 99, 235, 0.08);
+  --shadow-md: 0 4px 16px rgba(37, 99, 235, 0.12);
+  --shadow-lg: 0 8px 32px rgba(37, 99, 235, 0.15);
+  --shadow-glow: 0 0 24px rgba(37, 99, 235, 0.15);
+  --shadow-glow-strong: 0 0 40px rgba(37, 99, 235, 0.25);
+}
+
+
+/* ── Reset & Base Styles ─────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Smooth color transitions when switching theme — exclude SVG children
+   so lucide-react icons always render immediately without stroke flicker */
+*:not(svg):not(svg *), *::before, *::after {
+  transition:
+    background-color var(--transition-theme),
+    border-color var(--transition-theme),
+    color var(--transition-theme),
+    box-shadow var(--transition-theme);
+}
+
+/* Exclude elements where instant transitions are better */
+.btn, input, textarea, select, a {
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-base),
+    transform var(--transition-base),
+    opacity var(--transition-base);
+}
+
+/* SVGs always render stroke/fill immediately */
+svg, svg * {
+  transition: none;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(14, 165, 233, 0.06) 0%, transparent 50%);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Light mode body — cool blue-tinted gradient */
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(14, 165, 233, 0.04) 0%, transparent 50%);
+}
+
+a {
+  color: var(--color-accent-light);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-text-primary);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+/* ── Layout Utilities ────────────────────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.page-wrapper {
+  min-height: calc(100vh - 72px);
+  padding: var(--space-8) 0;
+}
+
+/* ── Glass Card ──────────────────────────────────────────────────────────────── */
+.glass-card {
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.glass-card:hover {
+  border-color: var(--color-glass-border-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.625rem var(--space-5);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary button — violet gradient */
+.btn-primary {
+  background: var(--color-accent-gradient);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.5);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Secondary button — ghost */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-color: var(--color-glass-border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-glass);
+  color: var(--color-text-primary);
+  border-color: var(--color-glass-border-hover);
+}
+
+/* Danger button */
+.btn-danger {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.2);
+}
+
+/* Icon-only button */
+.btn-icon {
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+}
+
+/* Size variants */
+.btn-sm {
+  padding: 0.4rem 0.875rem;
+  font-size: var(--font-size-xs);
+}
+
+.btn-lg {
+  padding: 0.875rem var(--space-8);
+  font-size: var(--font-size-base);
+}
+
+/* ── Form Elements ───────────────────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.form-label .required {
+  color: var(--color-danger);
+  margin-left: 2px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 0.75rem var(--space-4);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.form-input.error,
+.form-textarea.error {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a5a3c0' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-select option {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.form-error {
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* ── Badge / Chip ────────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+}
+
+.badge-violet {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--color-accent-light);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+.badge-green {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+/* ── Skeleton Loader ─────────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ── Animations ──────────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-slow) ease both;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale var(--transition-base) ease both;
+}
+
+/* ── Divider ─────────────────────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--color-glass-border);
+  margin: var(--space-6) 0;
+}
+
+/* ── Scrollbar Styling ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(37, 99, 235, 0.4);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-primary);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+/* ── Responsive Breakpoints ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
+
+  .page-wrapper {
+    padding: var(--space-6) 0;
+  }
+}
