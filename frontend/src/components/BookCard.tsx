@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Edit2, Trash2, BookOpen, Calendar, Hash, ArrowRight } from 'lucide-react';
 import type { Book } from '../types';
 import { use3DTilt } from '../hooks/use3DTilt';
+import { useAuth } from '../context/AuthContext';
 import styles from './BookCard.module.css';
 
 interface BookCardProps {
@@ -32,6 +33,24 @@ function genreHue(genre: string): string {
  */
 export default function BookCard({ book, onDelete, index = 0 }: BookCardProps) {
   const { ref, handleMouseMove, handleMouseLeave } = use3DTilt(6);
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  /** If not signed in, redirect to login; otherwise run the real handler */
+  const handleEditClick = (e: React.MouseEvent) => {
+    if (!isAuthenticated) {
+      e.preventDefault();
+      navigate('/auth/login');
+    }
+  };
+
+  const handleDeleteClick = () => {
+    if (!isAuthenticated) {
+      navigate('/auth/login');
+    } else {
+      onDelete(book.id, book.title);
+    }
+  };
 
   const truncate = (text: string, max: number) =>
     text.length > max ? text.slice(0, max) + '…' : text;
@@ -71,15 +90,16 @@ export default function BookCard({ book, onDelete, index = 0 }: BookCardProps) {
           <Link
             to={`/books/${book.id}/edit`}
             className={`btn btn-secondary ${styles.actionBtn}`}
-            title="Edit book"
+            title={isAuthenticated ? 'Edit book' : 'Sign in to edit'}
             id={`edit-book-${book.id}`}
+            onClick={handleEditClick}
           >
             <Edit2 size={16} />
           </Link>
           <button
             className={`btn btn-danger ${styles.actionBtn}`}
-            onClick={() => onDelete(book.id, book.title)}
-            title="Delete book"
+            onClick={handleDeleteClick}
+            title={isAuthenticated ? 'Delete book' : 'Sign in to delete'}
             id={`delete-book-${book.id}`}
           >
             <Trash2 size={16} />

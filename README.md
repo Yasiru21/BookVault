@@ -21,15 +21,18 @@ A full-stack book management system built as a software engineering intern assig
 
 ### Additional Features
 - 🔍 **Real-time search** by title or author (debounced)
-- 🏷️ **Genre filtering** with dropdown
+- 🏷️ **Genre filtering** with quick-filter pill buttons
 - 📄 **Pagination** — 9 books per page
-- 🔐 **JWT Authentication** — Register & Login (optional bonus)
-- 📖 **Book Detail View** with full metadata
-- ✅ **Form Validation** — both frontend (React Hook Form) and backend (DataAnnotations)
-- 🌙 **Dark glassmorphism UI** — premium, animated design
+- 🔐 **JWT Authentication** — Register & Login with secure password hashing
+- 👤 **User Profile Page** — personal profile card with username, email and role
+- 🛡️ **Protected Routes** — Create, Edit & Delete require authentication; guests are redirected to Sign In
+- 📖 **Book Detail View** with full metadata, reading time estimate and book age
+- ✅ **Form Validation** — both frontend (React Hook Form + Zod) and backend (DataAnnotations)
+- 🌙 **Dark glassmorphism UI** — premium, animated design with light mode toggle
 - 📱 **Fully responsive** — works on mobile, tablet, and desktop
 - 📋 **Swagger API Docs** — auto-generated at `/swagger`
-- 🌱 **Seeded data** — 3 sample books on first run
+- 🌱 **Seeded data** — 13 sample books across 8 genres on first run
+- 🎨 **Features & About pages** — dedicated informational pages with scroll animations
 
 ---
 

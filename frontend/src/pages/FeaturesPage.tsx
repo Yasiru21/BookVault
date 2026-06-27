@@ -64,6 +64,13 @@ const FEATURES = [
     desc: 'BookVault looks and works perfectly on desktop, tablet and mobile. A fluid grid layout and glassmorphism UI adapt seamlessly to every screen size.',
     color: '#0891b2',
   },
+  {
+    num: '07',
+    icon: Users,
+    title: 'User Profiles & Auth',
+    desc: 'Every user gets a personal profile page showing their account details. Protected routes ensure only signed-in users can create, edit, or delete books — guests can still browse the full catalogue.',
+    color: '#7c3aed',
+  },
 ];
 
 const BENEFITS = [
@@ -120,6 +127,8 @@ const BENEFITS = [
       'Keyboard-navigable for accessibility',
       'Clear error messages guide every action',
       'Dark and light mode for visual comfort',
+      'Personal profile page for every account',
+      'Smart redirects guide guests to sign in',
     ],
   },
   {

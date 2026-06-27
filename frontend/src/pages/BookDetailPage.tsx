@@ -4,6 +4,7 @@ import { Edit2, Trash2, ArrowLeft, BookOpen, Calendar, Hash, Tag, Clock, Share2,
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { getBookById, deleteBook } from '../services/bookService';
+import { useAuth } from '../context/AuthContext';
 import ConfirmModal from '../components/ConfirmModal';
 import Loader from '../components/Loader';
 import styles from './BookDetailPage.module.css';
@@ -44,8 +45,18 @@ export default function BookDetailPage() {
   const bookId = parseInt(id ?? '0', 10);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { isAuthenticated } = useAuth();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  /** Redirect guests to login instead of performing mutating actions */
+  const requireAuth = (action: () => void) => {
+    if (!isAuthenticated) {
+      navigate('/auth/login');
+    } else {
+      action();
+    }
+  };
 
   // ── Fetch book by ID ──────────────────────────────────────────────────────
   const { data: book, isLoading, isError } = useQuery({
@@ -120,7 +131,7 @@ export default function BookDetailPage() {
                 <h1 className={styles.title}>{book.title}</h1>
                 <p className={styles.author}>by {book.author}</p>
               </div>
-              {/* Actions */}
+              {/* Actions — guests are redirected to login */}
               <div className={styles.actionGroup}>
                 <button
                   className={`btn btn-secondary ${styles.shareBtn}`}
@@ -134,13 +145,16 @@ export default function BookDetailPage() {
                   to={`/books/${book.id}/edit`}
                   className="btn btn-secondary"
                   id={`edit-book-detail-${book.id}`}
+                  title={isAuthenticated ? 'Edit book' : 'Sign in to edit'}
+                  onClick={(e) => { if (!isAuthenticated) { e.preventDefault(); navigate('/auth/login'); } }}
                 >
                   <Edit2 size={15} /> Edit
                 </Link>
                 <button
                   className="btn btn-danger"
-                  onClick={() => setShowDeleteModal(true)}
+                  onClick={() => requireAuth(() => setShowDeleteModal(true))}
                   id={`delete-book-detail-${book.id}`}
+                  title={isAuthenticated ? 'Delete book' : 'Sign in to delete'}
                 >
                   <Trash2 size={15} /> Delete
                 </button>
@@ -251,14 +265,26 @@ export default function BookDetailPage() {
               </ul>
             </div>
 
-            {/* Catalogue Actions */}
+            {/* Catalogue Actions — guests redirected to login */}
             <div className={`glass-card ${styles.sideCard}`}>
               <h3 className={styles.sideTitle}>Catalogue Actions</h3>
               <div className={styles.actionStack}>
-                <Link to={`/books/${book.id}/edit`} className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
+                <Link
+                  to={`/books/${book.id}/edit`}
+                  className="btn btn-secondary"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                  onClick={(e) => { if (!isAuthenticated) { e.preventDefault(); navigate('/auth/login'); } }}
+                  title={isAuthenticated ? 'Edit record' : 'Sign in to edit'}
+                >
                   <Edit2 size={14} /> Edit Record
                 </Link>
-                <Link to="/books/new" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
+                <Link
+                  to="/books/new"
+                  className="btn btn-secondary"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                  onClick={(e) => { if (!isAuthenticated) { e.preventDefault(); navigate('/auth/login'); } }}
+                  title={isAuthenticated ? 'Add another book' : 'Sign in to add books'}
+                >
                   <BookOpen size={14} /> Add Another Book
                 </Link>
                 <Link to="/" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>

@@ -41,10 +41,10 @@ function useReveal(threshold = 0.12) {
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const STATS = [
-  { value: 6,   suffix: '+', label: 'Core Features',     icon: Award },
-  { value: 10,  suffix: '+', label: 'API Endpoints',     icon: Server },
+  { value: 7,   suffix: '+', label: 'Core Features',     icon: Award },
+  { value: 13,  suffix: '+', label: 'Books in Catalogue', icon: BookMarked },
   { value: 100, suffix: '%', label: 'TypeScript Typed',  icon: Code2 },
-  { value: 8,   suffix: '',  label: 'Technologies Used', icon: Layers },
+  { value: 10,  suffix: '+', label: 'Technologies Used', icon: Layers },
 ];
 
 const TECH_STACK = [
@@ -99,6 +99,7 @@ const TIMELINE = [
   { phase: 'Phase 2', title: 'Core CRUD',          desc: 'Full book management — create, read, update, delete with DTO validation, EF Core migrations and Swagger docs.' },
   { phase: 'Phase 3', title: 'UI/UX Polish',       desc: 'Glassmorphism design system, dark/light theme toggle, animated stats bar, genre filters and 3D card effects.' },
   { phase: 'Phase 4', title: 'Features & Content', desc: 'Hero banner with rotating quotes, Features page, Benefits section, About page, and animated footer.' },
+  { phase: 'Phase 5', title: 'Auth & Profiles',    desc: 'User profile page, protected routes (ProtectedRoute component), auth-aware UI hiding CUD buttons for guests and redirecting to login.' },
 ];
 
 // ── Stat Card ─────────────────────────────────────────────────────────────────

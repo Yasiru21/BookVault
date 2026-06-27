@@ -53,13 +53,15 @@ export default function Navbar() {
           >
             About
           </Link>
-          <Link
-            to="/books/new"
-            className={`${styles.navLink} ${isActive('/books/new') ? styles.active : ''}`}
-          >
-            <Plus size={15} />
-            Add Book
-          </Link>
+          {isAuthenticated && (
+            <Link
+              to="/books/new"
+              className={`${styles.navLink} ${isActive('/books/new') ? styles.active : ''}`}
+            >
+              <Plus size={15} />
+              Add Book
+            </Link>
+          )}
         </div>
 
         {/* Desktop Auth Actions */}
@@ -81,10 +83,10 @@ export default function Navbar() {
 
           {isAuthenticated ? (
             <>
-              <div className={styles.userChip}>
+              <Link to="/profile" className={styles.userChip} title="View your profile">
                 <User size={13} />
                 <span>{user?.username}</span>
-              </div>
+              </Link>
               <button className="btn btn-secondary btn-sm" onClick={handleLogout}>
                 <LogOut size={14} /> Sign Out
               </button>
@@ -119,9 +121,11 @@ export default function Navbar() {
           <Link to="/about" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
             About
           </Link>
-          <Link to="/books/new" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
-            Add Book
-          </Link>
+          {isAuthenticated && (
+            <Link to="/books/new" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
+              Add Book
+            </Link>
+          )}
           <div className={styles.mobileDivider} />
           {/* Theme toggle row in mobile menu */}
           <button
@@ -134,9 +138,14 @@ export default function Navbar() {
           </button>
           <div className={styles.mobileDivider} />
           {isAuthenticated ? (
-            <button className={`btn btn-secondary ${styles.mobileBtn}`} onClick={handleLogout}>
-              <LogOut size={15} /> Sign Out
-            </button>
+            <>
+              <Link to="/profile" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
+                <User size={15} /> My Profile
+              </Link>
+              <button className={`btn btn-secondary ${styles.mobileBtn}`} onClick={handleLogout}>
+                <LogOut size={15} /> Sign Out
+              </button>
+            </>
           ) : (
             <>
               <Link to="/auth/login" className={`btn btn-secondary ${styles.mobileBtn}`} onClick={() => setMobileOpen(false)}>

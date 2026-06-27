@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
@@ -14,8 +15,10 @@ import EditBookPage from './pages/EditBookPage';
 import BookDetailPage from './pages/BookDetailPage';
 import FeaturesPage from './pages/FeaturesPage';
 import AboutPage from './pages/AboutPage';
+import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // React Query Client Configuration
@@ -31,6 +34,18 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+/**
+ * ScrollToTop — Utility component to scroll the window to the top on every route change.
+ * Must be rendered inside a <BrowserRouter>.
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 /**
  * ThemedToaster — Toaster that adapts its appearance to the current theme.
@@ -85,21 +100,25 @@ export default function App() {
       <ThemeProvider>
         <AuthProvider>
           <BrowserRouter>
+            <ScrollToTop />
             <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
               <Navbar />
               <main style={{ flex: 1 }}>
                 <Routes>
                   {/* ── Book Routes ── */}
                   <Route path="/" element={<BookListPage />} />
-                  <Route path="/books/new" element={<AddBookPage />} />
+                  <Route path="/books/new" element={<ProtectedRoute><AddBookPage /></ProtectedRoute>} />
                   <Route path="/books/:id" element={<BookDetailPage />} />
-                  <Route path="/books/:id/edit" element={<EditBookPage />} />
+                  <Route path="/books/:id/edit" element={<ProtectedRoute><EditBookPage /></ProtectedRoute>} />
                   <Route path="/features" element={<FeaturesPage />} />
                   <Route path="/about" element={<AboutPage />} />
 
                   {/* ── Auth Routes ── */}
                   <Route path="/auth/login" element={<LoginPage />} />
                   <Route path="/auth/register" element={<RegisterPage />} />
+
+                  {/* ── Profile Route (protected) ── */}
+                  <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
                   {/* ── 404 Fallback ── */}
                   <Route

@@ -108,8 +108,10 @@ namespace LibraryAPI.Controllers
         /// </summary>
         /// <param name="dto">Book creation payload with title, author, and optional fields.</param>
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(typeof(BookResponseDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<BookResponseDto>> CreateBook([FromBody] CreateBookDto dto)
         {
             // ModelState validation is handled automatically by [ApiController] attribute
@@ -132,9 +134,11 @@ namespace LibraryAPI.Controllers
         /// <param name="id">The ID of the book to update.</param>
         /// <param name="dto">Updated book data.</param>
         [HttpPut("{id:int}")]
+        [Authorize]
         [ProducesResponseType(typeof(BookResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<BookResponseDto>> UpdateBook(int id, [FromBody] UpdateBookDto dto)
         {
             _logger.LogInformation("Updating book ID={Id}", id);
@@ -158,8 +162,10 @@ namespace LibraryAPI.Controllers
         /// </summary>
         /// <param name="id">The ID of the book to delete.</param>
         [HttpDelete("{id:int}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> DeleteBook(int id)
         {
             _logger.LogInformation("Deleting book ID={Id}", id);
