@@ -56,8 +56,8 @@ npm --version      # should print 9.x or 10.x
 
 ### Step 1 — Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/library-management-system.git
-cd library-management-system
+git clone https://github.com/Yasiru21/BookVault.git
+cd BookVault
 ```
 
 ### Step 2 — Run the Backend API
@@ -98,7 +98,7 @@ npm run dev
 ## 🗂️ Project Structure
 
 ```
-library-management-system/
+BookVault/
 │
 ├── backend/
 │   └── LibraryAPI/
