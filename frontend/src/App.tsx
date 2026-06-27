@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 // Lazy-loaded page components
 import BookListPage from './pages/BookListPage';
@@ -82,42 +83,44 @@ export default function App() {
       <ThemeProvider>
         <AuthProvider>
           <BrowserRouter>
-            <Navbar />
-            <main>
-              <Routes>
-                {/* ── Book Routes ── */}
-                <Route path="/" element={<BookListPage />} />
-                <Route path="/books/new" element={<AddBookPage />} />
-                <Route path="/books/:id" element={<BookDetailPage />} />
-                <Route path="/books/:id/edit" element={<EditBookPage />} />
+            <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+              <Navbar />
+              <main style={{ flex: 1 }}>
+                <Routes>
+                  {/* ── Book Routes ── */}
+                  <Route path="/" element={<BookListPage />} />
+                  <Route path="/books/new" element={<AddBookPage />} />
+                  <Route path="/books/:id" element={<BookDetailPage />} />
+                  <Route path="/books/:id/edit" element={<EditBookPage />} />
 
-                {/* ── Auth Routes ── */}
-                <Route path="/auth/login" element={<LoginPage />} />
-                <Route path="/auth/register" element={<RegisterPage />} />
+                  {/* ── Auth Routes ── */}
+                  <Route path="/auth/login" element={<LoginPage />} />
+                  <Route path="/auth/register" element={<RegisterPage />} />
 
-                {/* ── 404 Fallback ── */}
-                <Route
-                  path="*"
-                  element={
-                    <div style={{ textAlign: 'center', padding: '6rem 2rem', color: 'var(--color-text-secondary)' }}>
-                      <h1 style={{ fontSize: '4rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>404</h1>
-                      <p>This page doesn't exist.</p>
-                      <a href="/" className="btn btn-primary" style={{ marginTop: '1.5rem', display: 'inline-flex' }}>
-                        Back to Library
-                      </a>
-                    </div>
-                  }
-                />
-              </Routes>
-            </main>
+                  {/* ── 404 Fallback ── */}
+                  <Route
+                    path="*"
+                    element={
+                      <div style={{ textAlign: 'center', padding: '6rem 2rem', color: 'var(--color-text-secondary)' }}>
+                        <h1 style={{ fontSize: '4rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>404</h1>
+                        <p>This page doesn't exist.</p>
+                        <a href="/" className="btn btn-primary" style={{ marginTop: '1.5rem', display: 'inline-flex' }}>
+                          Back to Library
+                        </a>
+                      </div>
+                    }
+                  />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
 
             {/* Theme-aware toast notifications */}
+            <ReactQueryDevtools initialIsOpen={false} />
             <ThemedToaster />
           </BrowserRouter>
         </AuthProvider>
       </ThemeProvider>
-      {/* React Query DevTools — only visible in development */}
-      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

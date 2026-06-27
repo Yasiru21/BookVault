@@ -70,14 +70,14 @@ export default function BookCard({ book, onDelete, index = 0 }: BookCardProps) {
         <div className={styles.actions}>
           <Link
             to={`/books/${book.id}/edit`}
-            className={`btn btn-secondary btn-sm ${styles.actionBtn}`}
+            className={`btn btn-secondary ${styles.actionBtn}`}
             title="Edit book"
             id={`edit-book-${book.id}`}
           >
             <Edit2 size={16} />
           </Link>
           <button
-            className={`btn btn-danger btn-sm ${styles.actionBtn}`}
+            className={`btn btn-danger ${styles.actionBtn}`}
             onClick={() => onDelete(book.id, book.title)}
             title="Delete book"
             id={`delete-book-${book.id}`}

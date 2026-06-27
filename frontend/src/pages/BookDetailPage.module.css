@@ -19,12 +19,10 @@
 
 .backLink:hover {
   color: var(--color-accent-light);
-  background: rgba(124, 58, 237, 0.1);
+  background: color-mix(in srgb, var(--color-accent-primary) 8%, transparent);
 }
 
-.breadcrumbSep {
-  color: var(--color-text-muted);
-}
+.breadcrumbSep { color: var(--color-text-muted); }
 
 .breadcrumbCurrent {
   color: var(--color-text-secondary);
@@ -34,12 +32,20 @@
   white-space: nowrap;
 }
 
-/* Detail Card */
-.detailCard {
-  padding: var(--space-8);
-  max-width: 800px;
-  margin: 0 auto;
+/* ── Two-column layout ───────────────────────────────────────────────────── */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--space-6);
+  align-items: start;
 }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+/* ── Main Detail Card ───────────────────────────────────────────────────── */
+.detailCard { padding: var(--space-8); }
 
 .cardHeader {
   display: flex;
@@ -53,8 +59,8 @@
   height: 80px;
   flex-shrink: 0;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(79, 70, 229, 0.1));
-  border: 1px solid rgba(124, 58, 237, 0.2);
+  background: color-mix(in srgb, var(--color-accent-primary) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-accent-primary) 25%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -88,6 +94,11 @@
   gap: var(--space-3);
   margin-left: auto;
   flex-shrink: 0;
+  align-items: center;
+}
+
+.shareBtn {
+  transition: all var(--transition-base);
 }
 
 .divider {
@@ -102,8 +113,6 @@
   flex-direction: column;
   gap: var(--space-8);
 }
-
-.section {}
 
 .sectionTitle {
   font-size: var(--font-size-sm);
@@ -138,16 +147,22 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-4);
-  background: rgba(255, 255, 255, 0.03);
+  background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
   border: 1px solid var(--color-glass-border);
   border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.metaItem:hover {
+  border-color: color-mix(in srgb, var(--color-accent-primary) 30%, transparent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .metaIcon {
   width: 36px;
   height: 36px;
   border-radius: var(--radius-sm);
-  background: rgba(124, 58, 237, 0.1);
+  background: color-mix(in srgb, var(--color-accent-primary) 10%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,6 +183,65 @@
   color: var(--color-text-primary);
   font-weight: 500;
   margin-top: 2px;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────────── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: sticky;
+  top: 90px; /* below navbar */
+}
+
+.sideCard {
+  padding: 1.5rem;
+}
+
+.sideTitle {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-glass-border);
+}
+
+/* Quick Facts list */
+.factList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.factItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.factLabel {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.factValue {
+  color: var(--color-text-primary);
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Catalogue Actions */
+.actionStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 /* Not Found */
@@ -193,9 +267,7 @@
 }
 
 @media (max-width: 640px) {
-  .detailCard {
-    padding: var(--space-5);
-  }
+  .detailCard { padding: var(--space-5); }
 
   .cardHeader {
     flex-direction: column;
@@ -205,6 +277,7 @@
   .actionGroup {
     margin-left: 0;
     width: 100%;
+    flex-wrap: wrap;
   }
 
   .actionGroup .btn {
@@ -212,7 +285,5 @@
     justify-content: center;
   }
 
-  .title {
-    font-size: var(--font-size-2xl);
-  }
+  .title { font-size: var(--font-size-2xl); }
 }

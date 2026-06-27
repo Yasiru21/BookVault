@@ -7,6 +7,7 @@ import { getBooks, deleteBook, getGenres } from '../services/bookService';
 import BookCard from '../components/BookCard';
 import ConfirmModal from '../components/ConfirmModal';
 import { BookCardSkeleton } from '../components/Loader';
+import HeroBanner from '../components/HeroBanner';
 import styles from './BookListPage.module.css';
 
 /**
@@ -92,6 +93,9 @@ export default function BookListPage() {
   return (
     <div className="page-wrapper">
       <div className="container">
+
+        {/* ── Hero Welcome Banner ── */}
+        <HeroBanner />
 
         {/* ── Floating Background Orbs (decorative) ── */}
         <div className={styles.orb1} aria-hidden />
@@ -184,6 +188,23 @@ export default function BookListPage() {
             </button>
           )}
         </div>
+
+        {/* ── Genre Quick-Filter Pills ── */}
+        {genres.length > 0 && (
+          <div className={styles.genrePills}>
+            <button
+              className={`${styles.genrePill} ${!genre ? styles.genrePillActive : ''}`}
+              onClick={() => { setGenre(''); setPage(1); }}
+            >All</button>
+            {genres.map(g => (
+              <button
+                key={g}
+                className={`${styles.genrePill} ${genre === g ? styles.genrePillActive : ''}`}
+                onClick={() => { setGenre(g); setPage(1); }}
+              >{g}</button>
+            ))}
+          </div>
+        )}
 
         {/* ── Error State ── */}
         {isError && (
