@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Github, Linkedin, Twitter, ArrowRight, Mail } from 'lucide-react';
+import { BookOpen, Github, Linkedin, Instagram, ArrowRight, Mail } from 'lucide-react';
 import styles from './Footer.module.css';
 
 // ── Scroll-triggered animation hook ─────────────────────────────────────────
@@ -24,28 +24,28 @@ const NAV_COLS = [
   {
     title: 'Platform',
     links: [
-      { label: 'Browse Catalog', to: '/', internal: true },
-      { label: 'Add Book',       to: '/books/new', internal: true },
-      { label: 'Features',       to: '#' },
-      { label: 'Integrations',   to: '#' },
+      { label: 'Browse Catalog', to: '/',            internal: true },
+      { label: 'Add Book',       to: '/books/new',   internal: true },
+      { label: 'Features',       to: '/features',    internal: true },
+      { label: 'About',          to: '/about',       internal: true },
     ],
   },
   {
     title: 'Resources',
     links: [
-      { label: 'Documentation', to: '#' },
-      { label: 'API Reference',  to: '#' },
-      { label: 'Help Center',    to: '#' },
-      { label: 'System Status',  to: '#' },
+      { label: 'API Docs (Swagger)', to: 'http://localhost:5000/swagger', internal: false },
+      { label: 'GitHub Repository',  to: 'https://github.com/Yasiru21/BookVault', internal: false },
+      { label: 'Sign Up',            to: '/auth/register', internal: true },
+      { label: 'Sign In',            to: '/auth/login',    internal: true },
     ],
   },
   {
-    title: 'Company',
+    title: 'Contact',
     links: [
-      { label: 'About Us',  to: '#' },
-      { label: 'Careers',   to: '#' },
-      { label: 'Security',  to: '#' },
-      { label: 'Contact',   to: '#' },
+      { label: 'Contact Page',  to: '/contact',                         internal: true },
+      { label: 'GitHub',        to: 'https://github.com/Yasiru21',      internal: false },
+      { label: 'LinkedIn',      to: 'https://www.linkedin.com/in/yasiru-de-silva-190009307', internal: false },
+      { label: 'Email Us',      to: 'mailto:ygimres2@gmail.com',        internal: false },
     ],
   },
 ];
@@ -88,9 +88,9 @@ export default function Footer() {
               Next-generation library management. Organize, track and share your
               entire reading world — all in one place.
             </p>
-            <a href="mailto:support@bookvault.dev" className={styles.contactEmail}>
+            <a href="mailto:ygimres2@gmail.com" className={styles.contactEmail}>
               <Mail size={14} />
-              support@bookvault.dev
+              ygimres2@gmail.com
             </a>
           </div>
 
@@ -156,11 +156,11 @@ export default function Footer() {
           </nav>
           <div className={styles.socials}>
             {[
-              { Icon: Twitter,  label: 'Twitter'  },
-              { Icon: Linkedin, label: 'LinkedIn'  },
-              { Icon: Github,   label: 'GitHub'    },
-            ].map(({ Icon, label }) => (
-              <a key={label} href="#" aria-label={label} className={styles.socialBtn}>
+              { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/yasiru_gimrez?igsh=bHM5Z3k2OWVjOTAy' },
+              { Icon: Linkedin,  label: 'LinkedIn',  href: 'https://www.linkedin.com/in/yasiru-de-silva-190009307' },
+              { Icon: Github,    label: 'GitHub',    href: 'https://github.com/Yasiru21' },
+            ].map(({ Icon, label, href }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={styles.socialBtn}>
                 <Icon size={18} />
               </a>
             ))}

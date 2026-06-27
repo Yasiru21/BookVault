@@ -53,6 +53,12 @@ export default function Navbar() {
           >
             About
           </Link>
+          <Link
+            to="/contact"
+            className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
+          >
+            Contact
+          </Link>
           {isAuthenticated && (
             <Link
               to="/books/new"
@@ -120,6 +126,9 @@ export default function Navbar() {
           </Link>
           <Link to="/about" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
             About
+          </Link>
+          <Link to="/contact" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
+            Contact
           </Link>
           {isAuthenticated && (
             <Link to="/books/new" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>

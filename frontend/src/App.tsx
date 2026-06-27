@@ -15,6 +15,7 @@ import EditBookPage from './pages/EditBookPage';
 import BookDetailPage from './pages/BookDetailPage';
 import FeaturesPage from './pages/FeaturesPage';
 import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -112,6 +113,7 @@ export default function App() {
                   <Route path="/books/:id/edit" element={<ProtectedRoute><EditBookPage /></ProtectedRoute>} />
                   <Route path="/features" element={<FeaturesPage />} />
                   <Route path="/about" element={<AboutPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
 
                   {/* ── Auth Routes ── */}
                   <Route path="/auth/login" element={<LoginPage />} />
