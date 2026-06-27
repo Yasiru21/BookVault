@@ -124,7 +124,9 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
         <ChevronDown size={18} className={`${styles.faqChevron} ${open ? styles.faqChevronOpen : ''}`} />
       </button>
       <div className={styles.faqAnswer}>
-        <p>{a}</p>
+        <div className={styles.faqAnswerInner}>
+          <p>{a}</p>
+        </div>
       </div>
     </div>
   );

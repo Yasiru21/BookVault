@@ -303,8 +303,11 @@
 .faqOpen .faqAnswer {
   grid-template-rows: 1fr;
 }
-.faqAnswer p {
+.faqAnswerInner {
   overflow: hidden;
+  min-height: 0;
+}
+.faqAnswer p {
   padding: 0 var(--space-6) var(--space-5);
   color: var(--color-text-secondary);
   font-size: 0.95rem;
