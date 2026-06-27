@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace LibraryAPI.Data
 {
     /// <summary>
-    /// EF Core DbContext for the Library Management System.
+    /// EF Core DbContext for BookVault.
     /// Manages database connections, entity configurations, and migrations.
     /// SQLite is used as the database engine for portability and simplicity.
     /// </summary>

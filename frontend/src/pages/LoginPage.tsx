@@ -45,7 +45,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className={styles.logoWrap}>
           <div className={styles.logoIcon}><BookOpen size={24} strokeWidth={2} /></div>
-          <h1 className={styles.logoText}>LibraryMS</h1>
+          <h1 className={styles.logoText}>BookVault</h1>
         </div>
 
         <h2 className={styles.heading}>Welcome back</h2>

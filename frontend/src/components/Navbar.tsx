@@ -33,7 +33,7 @@ export default function Navbar() {
           <div className={styles.logoIcon}>
             <BookOpen size={20} strokeWidth={2.5} />
           </div>
-          <span className={styles.logoText}>LibraryMS</span>
+          <span className={styles.logoText}>BookVault</span>
         </Link>
 
         {/* Desktop Nav Links */}

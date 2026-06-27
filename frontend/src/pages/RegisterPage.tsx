@@ -52,11 +52,11 @@ export default function RegisterPage() {
         {/* Logo */}
         <div className={styles.logoWrap}>
           <div className={styles.logoIcon}><BookOpen size={24} strokeWidth={2} /></div>
-          <h1 className={styles.logoText}>LibraryMS</h1>
+          <h1 className={styles.logoText}>BookVault</h1>
         </div>
 
         <h2 className={styles.heading}>Create an account</h2>
-        <p className={styles.subheading}>Join the library management system</p>
+        <p className={styles.subheading}>Join BookVault</p>
 
         <form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)} noValidate>
           {/* Username */}

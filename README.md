@@ -1,6 +1,6 @@
-# 📚 Library Management System
+# 📚 BookVault
 
-A full-stack Library Management System built as a software engineering intern assignment.
+A full-stack book management system built as a software engineering intern assignment.
 
 **Stack:**
 - **Backend:** C# .NET 8 Web API + Entity Framework Core + SQLite + JWT Auth
