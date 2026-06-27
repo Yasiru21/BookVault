@@ -94,7 +94,7 @@
 
 /* ── Section ─────────────────────────────────────────────────────────────────── */
 .section {
-  padding: var(--space-20) 0;
+  padding: 5rem 0;
 }
 .faqSection {
   background: color-mix(in srgb, var(--color-accent-primary) 3%, transparent);
