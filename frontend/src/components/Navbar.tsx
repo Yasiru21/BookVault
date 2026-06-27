@@ -42,6 +42,18 @@ export default function Navbar() {
             All Books
           </Link>
           <Link
+            to="/features"
+            className={`${styles.navLink} ${isActive('/features') ? styles.active : ''}`}
+          >
+            Features
+          </Link>
+          <Link
+            to="/about"
+            className={`${styles.navLink} ${isActive('/about') ? styles.active : ''}`}
+          >
+            About
+          </Link>
+          <Link
             to="/books/new"
             className={`${styles.navLink} ${isActive('/books/new') ? styles.active : ''}`}
           >
@@ -100,6 +112,12 @@ export default function Navbar() {
         <div className={styles.mobileMenu}>
           <Link to="/" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
             All Books
+          </Link>
+          <Link to="/features" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
+            Features
+          </Link>
+          <Link to="/about" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
+            About
           </Link>
           <Link to="/books/new" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
             Add Book

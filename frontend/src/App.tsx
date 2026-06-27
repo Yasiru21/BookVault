@@ -12,6 +12,8 @@ import BookListPage from './pages/BookListPage';
 import AddBookPage from './pages/AddBookPage';
 import EditBookPage from './pages/EditBookPage';
 import BookDetailPage from './pages/BookDetailPage';
+import FeaturesPage from './pages/FeaturesPage';
+import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 
@@ -92,6 +94,8 @@ export default function App() {
                   <Route path="/books/new" element={<AddBookPage />} />
                   <Route path="/books/:id" element={<BookDetailPage />} />
                   <Route path="/books/:id/edit" element={<EditBookPage />} />
+                  <Route path="/features" element={<FeaturesPage />} />
+                  <Route path="/about" element={<AboutPage />} />
 
                   {/* ── Auth Routes ── */}
                   <Route path="/auth/login" element={<LoginPage />} />
