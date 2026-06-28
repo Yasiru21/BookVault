@@ -202,6 +202,42 @@ namespace LibraryAPI.Data
                     ISBN = "978-0374533557",
                     CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
                     UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Book
+                {
+                    Id = 14,
+                    Title = "The Catcher in the Rye",
+                    Author = "J.D. Salinger",
+                    Description = "A novel detailing two days in the life of 16-year-old Holden Caulfield.",
+                    Genre = "Fiction",
+                    PublishedYear = 1951,
+                    ISBN = "978-0316769174",
+                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Book
+                {
+                    Id = 15,
+                    Title = "To Kill a Mockingbird",
+                    Author = "Harper Lee",
+                    Description = "A novel about the serious issues of rape and racial inequality.",
+                    Genre = "Fiction",
+                    PublishedYear = 1960,
+                    ISBN = "978-0060935467",
+                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                },
+                new Book
+                {
+                    Id = 16,
+                    Title = "Sapiens: A Brief History of Humankind",
+                    Author = "Yuval Noah Harari",
+                    Description = "Explores the history of the human species from the Stone Age up to the twenty-first century.",
+                    Genre = "History",
+                    PublishedYear = 2011,
+                    ISBN = "978-0062316097",
+                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }
             );
         }

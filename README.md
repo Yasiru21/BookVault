@@ -31,8 +31,9 @@ A full-stack book management system built as a software engineering intern assig
 - 🌙 **Dark glassmorphism UI** — premium, animated design with light mode toggle
 - 📱 **Fully responsive** — works on mobile, tablet, and desktop
 - 📋 **Swagger API Docs** — auto-generated at `/swagger`
-- 🌱 **Seeded data** — 13 sample books across 8 genres on first run
+- 🌱 **Seeded data** — 16 sample books across 8 genres on first run
 - 🎨 **Features & About pages** — dedicated informational pages with scroll animations
+- 📊 **Dynamic Stats** — Live dashboard stats powered by React Query pulling directly from backend API.
 
 ---
 

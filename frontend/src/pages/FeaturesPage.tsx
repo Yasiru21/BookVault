@@ -53,8 +53,8 @@ const FEATURES = [
   {
     num: '05',
     icon: BarChart3,
-    title: 'Live Library Statistics',
-    desc: 'Real-time dashboard counters show total books, unique authors and genre breadth — giving librarians instant insight into collection growth.',
+    title: 'Dynamic API Statistics',
+    desc: 'Live dashboard counters automatically fetch real-time data from the backend API, giving librarians instant, accurate insight into the exact scale of the collection.',
     color: '#db2777',
   },
   {
@@ -116,6 +116,7 @@ const BENEFITS = [
       'Background refetch on window focus',
       'Optimistic UI updates for instant feedback',
       'Stale-while-revalidate caching strategy',
+      'Pre-seeded with a rich variety of classical books',
     ],
   },
   {

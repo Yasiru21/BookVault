@@ -5,6 +5,8 @@ import {
   Zap, Server, Layout, Key,
   ArrowRight, Award, BookMarked
 } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { getBooks } from '../services/bookService';
 import styles from './AboutPage.module.css';
 
 // ── Animated counter hook ─────────────────────────────────────────────────────
@@ -40,12 +42,7 @@ function useReveal(threshold = 0.12) {
 }
 
 // ── Data ──────────────────────────────────────────────────────────────────────
-const STATS = [
-  { value: 7,   suffix: '+', label: 'Core Features',     icon: Award },
-  { value: 13,  suffix: '+', label: 'Books in Catalogue', icon: BookMarked },
-  { value: 100, suffix: '%', label: 'TypeScript Typed',  icon: Code2 },
-  { value: 10,  suffix: '+', label: 'Technologies Used', icon: Layers },
-];
+// Stats are now generated dynamically in the component
 
 const TECH_STACK = [
   {
@@ -100,10 +97,11 @@ const TIMELINE = [
   { phase: 'Phase 3', title: 'UI/UX Polish',       desc: 'Glassmorphism design system, dark/light theme toggle, animated stats bar, genre filters and 3D card effects.' },
   { phase: 'Phase 4', title: 'Features & Content', desc: 'Hero banner with rotating quotes, Features page, Benefits section, About page, and animated footer.' },
   { phase: 'Phase 5', title: 'Auth & Profiles',    desc: 'User profile page, protected routes (ProtectedRoute component), auth-aware UI hiding CUD buttons for guests and redirecting to login.' },
+  { phase: 'Phase 6', title: 'Dynamic Data & Polish', desc: 'Integrated dynamic API-driven statistics using React Query, expanded the seed catalogue with 16+ diverse classical titles, and refined the UI by cleaning up developer tools for a production-ready look.' },
 ];
 
 // ── Stat Card ─────────────────────────────────────────────────────────────────
-function StatCard({ value, suffix, label, icon: Icon, active }: typeof STATS[0] & { active: boolean }) {
+function StatCard({ value, suffix, label, icon: Icon, active }: { value: number, suffix: string, label: string, icon: any, active: boolean }) {
   const count = useCounter(value, 1600, active);
   return (
     <div className={styles.statCard}>
@@ -114,12 +112,25 @@ function StatCard({ value, suffix, label, icon: Icon, active }: typeof STATS[0] 
   );
 }
 
-// ── Page ──────────────────────────────────────────────────────────────────────
 export default function AboutPage() {
   const { ref: statsRef, visible: statsVisible } = useReveal(0.2);
   const { ref: stackRef, visible: stackVisible } = useReveal(0.08);
   const { ref: archRef,  visible: archVisible  } = useReveal(0.1);
   const { ref: timeRef,  visible: timeVisible  } = useReveal(0.08);
+
+  const { data } = useQuery({
+    queryKey: ['booksTotalCount'],
+    queryFn: () => getBooks({ page: 1, pageSize: 1 })
+  });
+
+  const totalBooks = data?.totalCount ?? 13; // default to 13 while loading
+
+  const dynamicStats = [
+    { value: 7,   suffix: '+', label: 'Core Features',     icon: Award },
+    { value: totalBooks, suffix: '+', label: 'Books in Catalogue', icon: BookMarked },
+    { value: 100, suffix: '%', label: 'TypeScript Typed',  icon: Code2 },
+    { value: 10,  suffix: '+', label: 'Technologies Used', icon: Layers },
+  ];
 
   return (
     <div className={styles.page}>
@@ -206,7 +217,7 @@ export default function AboutPage() {
       >
         <div className="container">
           <div className={styles.statsGrid}>
-            {STATS.map(s => (
+            {dynamicStats.map(s => (
               <StatCard key={s.label} {...s} active={statsVisible} />
             ))}
           </div>
