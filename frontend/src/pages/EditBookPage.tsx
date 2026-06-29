@@ -47,7 +47,7 @@ export default function EditBookPage() {
     const payload: UpdateBookPayload = {
       title: data.title,
       author: data.author,
-      description: data.description || undefined,
+      description: data.description,      // no longer undefined
       isbn: data.isbn || undefined,
       genre: data.genre || undefined,
       publishedYear: data.publishedYear || undefined,
