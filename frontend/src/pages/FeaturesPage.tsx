@@ -47,14 +47,14 @@ const FEATURES = [
     num: '04',
     icon: Tag,
     title: 'Genre Classification',
-    desc: 'Organise your entire collection by genre with visual pill filters. Readers and librarians can jump directly to Fiction, Technology, Business or any custom category.',
+    desc: 'Organise your entire collection by genre with visual pill filters. Users can jump directly to Fiction, Technology, Business or any custom category.',
     color: '#d97706',
   },
   {
     num: '05',
     icon: BarChart3,
     title: 'Dynamic API Statistics',
-    desc: 'Live dashboard counters automatically fetch real-time data from the backend API, giving librarians instant, accurate insight into the exact scale of the collection.',
+    desc: 'Live dashboard counters automatically fetch real-time data from the backend API, giving you instant, accurate insight into the exact scale of the collection.',
     color: '#db2777',
   },
   {
@@ -91,7 +91,7 @@ const BENEFITS = [
     color: '#10b981',
     items: [
       'JWT authentication on every API request',
-      'Role-based access control for librarians',
+      'Secure access control for managing books',
       'SQLite database with transaction integrity',
       'Automatic session management & logout',
     ],
@@ -245,7 +245,7 @@ export default function FeaturesPage() {
           <SectionHeading
             label="Benefits"
             title="Why choose BookVault?"
-            sub="Real advantages that save time, reduce cost, and improve the experience for every librarian and reader."
+            sub="Real advantages that save time, reduce cost, and improve the experience for every user."
           />
 
           <div className={styles.benefitGrid}>

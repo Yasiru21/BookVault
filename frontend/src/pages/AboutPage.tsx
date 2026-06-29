@@ -166,9 +166,9 @@ export default function AboutPage() {
                 and effortless to use.
               </p>
               <p className={styles.sectionBody}>
-                Every feature was designed with two people in mind: the <strong>librarian</strong>{' '}
-                who needs to manage thousands of records efficiently, and the <strong>reader</strong>{' '}
-                who wants to discover their next great book without friction.
+                Every feature was designed with the user in mind, allowing you
+                to manage thousands of records efficiently and discover your 
+                next great book without friction.
               </p>
               <div className={styles.missionPoints}>
                 {[
