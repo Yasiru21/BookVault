@@ -8,7 +8,7 @@ export interface Book {
   id: number;
   title: string;
   author: string;
-  description?: string;
+  description: string;   // now always required
   isbn?: string;
   genre?: string;
   publishedYear?: number;
@@ -20,7 +20,7 @@ export interface Book {
 export interface CreateBookPayload {
   title: string;
   author: string;
-  description?: string;
+  description: string;   // now required
   isbn?: string;
   genre?: string;
   publishedYear?: number;
@@ -30,7 +30,7 @@ export interface CreateBookPayload {
 export interface UpdateBookPayload {
   title: string;
   author: string;
-  description?: string;
+  description: string;   // now required
   isbn?: string;
   genre?: string;
   publishedYear?: number;

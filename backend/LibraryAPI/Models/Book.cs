@@ -20,9 +20,10 @@ namespace LibraryAPI.Models
         [MaxLength(150)]
         public string Author { get; set; } = string.Empty;
 
-        /// <summary>Optional description or synopsis of the book.</summary>
+        /// <summary>Description or synopsis of the book. Required.</summary>
+        [Required]
         [MaxLength(2000)]
-        public string? Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         /// <summary>ISBN number (optional). Must be unique if provided.</summary>
         [MaxLength(20)]

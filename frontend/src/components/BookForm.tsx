@@ -110,14 +110,17 @@ export default function BookForm({ initialData, onSubmit, isSubmitting }: BookFo
           )}
         </div>
 
-        {/* Description — Optional */}
+        {/* Description — Required */}
         <div className="form-group" style={{ gridColumn: '1 / -1' }}>
-          <label htmlFor="description" className="form-label">Description</label>
+          <label htmlFor="description" className="form-label">
+            Description <span className="required">*</span>
+          </label>
           <textarea
             id="description"
             placeholder="A brief synopsis or description of the book…"
             className={`form-textarea ${errors.description ? 'error' : ''}`}
             {...register('description', {
+              required: 'Description is required.',
               maxLength: { value: 2000, message: 'Description must be 2000 characters or fewer.' },
             })}
           />
