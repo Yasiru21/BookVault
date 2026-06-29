@@ -20,17 +20,10 @@ namespace LibraryAPI.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    public class BooksController : ControllerBase
+    public class BooksController(IBookService bookService, ILogger<BooksController> logger) : ControllerBase
     {
-        private readonly IBookService _bookService;
-        private readonly ILogger<BooksController> _logger;
-
-        /// <summary>Constructor injection of BookService and logger.</summary>
-        public BooksController(IBookService bookService, ILogger<BooksController> logger)
-        {
-            _bookService = bookService;
-            _logger = logger;
-        }
+        private readonly IBookService _bookService = bookService;
+        private readonly ILogger<BooksController> _logger = logger;
 
         // ─────────────────────────────────────────────────────────────────────
         // GET /api/books
@@ -56,7 +49,10 @@ namespace LibraryAPI.Controllers
             pageSize = Math.Clamp(pageSize, 1, 100);
             page = Math.Max(1, page);
 
-            _logger.LogInformation("Fetching books | search={Search} genre={Genre} page={Page}", search, genre, page);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Fetching books | search={Search} genre={Genre} page={Page}", search, genre, page);
+            }
 
             var result = await _bookService.GetAllBooksAsync(search, genre, page, pageSize);
             return Ok(result);
@@ -86,7 +82,10 @@ namespace LibraryAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<BookResponseDto>> GetBook(int id)
         {
-            _logger.LogInformation("Fetching book ID={Id}", id);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Fetching book ID={Id}", id);
+            }
 
             var book = await _bookService.GetBookByIdAsync(id);
             if (book is null)
@@ -115,7 +114,10 @@ namespace LibraryAPI.Controllers
         public async Task<ActionResult<BookResponseDto>> CreateBook([FromBody] CreateBookDto dto)
         {
             // ModelState validation is handled automatically by [ApiController] attribute
-            _logger.LogInformation("Creating book | Title={Title} Author={Author}", dto.Title, dto.Author);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Creating book | Title={Title} Author={Author}", dto.Title, dto.Author);
+            }
 
             var created = await _bookService.CreateBookAsync(dto);
 
@@ -141,7 +143,10 @@ namespace LibraryAPI.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<BookResponseDto>> UpdateBook(int id, [FromBody] UpdateBookDto dto)
         {
-            _logger.LogInformation("Updating book ID={Id}", id);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Updating book ID={Id}", id);
+            }
 
             var updated = await _bookService.UpdateBookAsync(id, dto);
             if (updated is null)
@@ -168,7 +173,10 @@ namespace LibraryAPI.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            _logger.LogInformation("Deleting book ID={Id}", id);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Deleting book ID={Id}", id);
+            }
 
             bool deleted = await _bookService.DeleteBookAsync(id);
             if (!deleted)

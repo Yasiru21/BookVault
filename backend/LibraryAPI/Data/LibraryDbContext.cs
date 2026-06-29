@@ -8,16 +8,14 @@ namespace LibraryAPI.Data
     /// Manages database connections, entity configurations, and migrations.
     /// SQLite is used as the database engine for portability and simplicity.
     /// </summary>
-    public class LibraryDbContext : DbContext
+    public class LibraryDbContext(DbContextOptions<LibraryDbContext> options) : DbContext(options)
     {
-        /// <summary>Initializes the context with injected options (from DI container).</summary>
-        public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options) { }
 
         /// <summary>Table for book records.</summary>
-        public DbSet<Book> Books { get; set; }
+        public DbSet<Book> Books { get; set; } = null!;
 
         /// <summary>Table for user accounts.</summary>
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; } = null!;
 
         /// <summary>
         /// Configures entity relationships, indexes, and constraints using Fluent API.

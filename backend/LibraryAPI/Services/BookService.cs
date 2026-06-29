@@ -10,15 +10,9 @@ namespace LibraryAPI.Services
     /// All database operations are async to avoid blocking the thread pool.
     /// The service receives the DbContext via constructor injection (DI).
     /// </summary>
-    public class BookService : IBookService
+    public class BookService(LibraryDbContext context) : IBookService
     {
-        private readonly LibraryDbContext _context;
-
-        /// <summary>Injects the EF Core DbContext via constructor injection.</summary>
-        public BookService(LibraryDbContext context)
-        {
-            _context = context;
-        }
+        private readonly LibraryDbContext _context = context;
 
         // ─────────────────────────────────────────────────────────────────────
         // GET ALL — with optional search and pagination
@@ -34,10 +28,9 @@ namespace LibraryAPI.Services
             // Apply search filter — case-insensitive substring match on title or author
             if (!string.IsNullOrWhiteSpace(search))
             {
-                string lowerSearch = search.ToLower();
                 query = query.Where(b =>
-                    b.Title.ToLower().Contains(lowerSearch) ||
-                    b.Author.ToLower().Contains(lowerSearch));
+                    b.Title.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+                    b.Author.Contains(search, StringComparison.OrdinalIgnoreCase));
             }
 
             // Apply genre filter
@@ -88,7 +81,7 @@ namespace LibraryAPI.Services
             {
                 Title = dto.Title.Trim(),
                 Author = dto.Author.Trim(),
-                Description = dto.Description?.Trim(),
+                Description = dto.Description.Trim(),
                 ISBN = dto.ISBN?.Trim(),
                 Genre = dto.Genre?.Trim(),
                 PublishedYear = dto.PublishedYear,
@@ -115,7 +108,7 @@ namespace LibraryAPI.Services
             // Only update the fields that were provided
             book.Title = dto.Title.Trim();
             book.Author = dto.Author.Trim();
-            book.Description = dto.Description?.Trim();
+            book.Description = dto.Description.Trim();
             book.ISBN = dto.ISBN?.Trim();
             book.Genre = dto.Genre?.Trim();
             book.PublishedYear = dto.PublishedYear;
