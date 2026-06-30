@@ -32,7 +32,7 @@ A full-stack book management system built as a software engineering intern assig
 - 📱 **Fully responsive** — works on mobile, tablet, and desktop
 - 📋 **Swagger API Docs** — auto-generated at `/swagger`
 - 🌱 **Seeded data** — 16 sample books across 8 genres on first run
-- 🎨 **Features & About pages** — dedicated informational pages with scroll animations
+- 🎨 **Features, About, & Contact pages** — dedicated informational pages with scroll animations and FAQs
 - 📊 **Dynamic Stats** — Live dashboard stats powered by React Query pulling directly from backend API.
 
 ---
@@ -130,7 +130,8 @@ BookVault/
 ├── frontend/
 │   └── src/
 │       ├── components/
-│       │   ├── Navbar.tsx              # Top navigation bar
+│       │   ├── Navbar.tsx              # Top navigation bar with theme toggle
+│       │   ├── Footer.tsx              # Application footer
 │       │   ├── BookCard.tsx            # Book grid card
 │       │   ├── BookForm.tsx            # Shared create/edit form
 │       │   ├── ConfirmModal.tsx        # Delete confirmation dialog
@@ -140,10 +141,15 @@ BookVault/
 │       ├── pages/
 │       │   ├── BookListPage.tsx        # Home — book grid with search/filter
 │       │   ├── BookDetailPage.tsx      # Single book detail view
-│       │   ├── AddBookPage.tsx         # Create book form page
-│       │   ├── EditBookPage.tsx        # Edit book form page
+│       │   ├── AddBookPage.tsx         # Create book form page (Protected)
+│       │   ├── EditBookPage.tsx        # Edit book form page (Protected)
 │       │   ├── LoginPage.tsx           # Login form page
-│       │   └── RegisterPage.tsx        # Registration form page
+│       │   ├── RegisterPage.tsx        # Registration form page
+│       │   ├── ProfilePage.tsx         # User profile page (Protected)
+│       │   ├── ContactPage.tsx         # Contact info & FAQs
+│       │   ├── FeaturesPage.tsx        # Feature showcase
+│       │   ├── AboutPage.tsx           # About the project
+│       │   └── NotFoundPage.tsx        # 404 Error page
 │       ├── services/
 │       │   ├── api.ts                  # Axios instance with interceptors
 │       │   ├── bookService.ts          # Book API functions
